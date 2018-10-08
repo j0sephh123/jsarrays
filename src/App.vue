@@ -1,29 +1,72 @@
 <template>
-  <div id="app">
-    <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
+<div class="columns section" id="app"> <!-- #app is being mounted in main.js. Don't remove the id ! -->
+  <div class="column is-3 border is-offset-2">
+
+    <div class="div" v-for="item in items" :key="item._id">
+      <div class="level">
+        <div class="level-left">{{item.name}}</div>
+        <div
+          @click="$store.commit('items/setDropdown', {id: item._id})"
+          class="level-right">
+          <i :class="item.dropdown ? 'fas fa-chevron-up' : 'fas fa-chevron-down'"></i>
+        </div>
+      </div>
+      <div v-show="item.dropdown">content</div><hr>
     </div>
-    <router-view/>
+
+    
+    
+
   </div>
+
+
+
+
+
+
+  <div class="column is-5 border">
+    <div class="level">
+      <div class="level-left">1</div>
+      <div class="level-right">2</div>
+    </div>
+    <div class="level">
+      <div class="level-left">1</div>
+      <div class="level-right">2</div>
+    </div>
+    
+  </div>
+</div>
 </template>
 
-<style lang="scss">
-#app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-}
-#nav {
-  padding: 30px;
-  a {
-    font-weight: bold;
-    color: #2c3e50;
-    &.router-link-exact-active {
-      color: #42b983;
-    }
+<script>
+import { mapGetters } from "vuex";
+
+export default {
+  
+  data() {
+    return {
+      
+    };
+  },
+  methods: {},
+  computed: {
+    ...mapGetters({
+      items: 'items/items'
+    })
+  },
+  watch: {
+    
+  },
+  async mounted() {
+    
   }
+};
+</script>
+
+<style>
+.border {
+  box-shadow: 0 2px 3px rgba(10, 10, 10, 0.1), 0 0 0 1px rgba(10, 10, 10, 0.1);
+  border-radius: 6px;
+  color: #4a4a4a;
 }
 </style>
